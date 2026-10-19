@@ -34,16 +34,28 @@ def get_guess():
     return guess.lower()
 
 def evaluate_guess(secret_word, player_guess):
-    secret_word_list = []
-    player_guess_list = []
     result = []
-    for i in range(5):
-        if player_guess[i] != secret_word[i]:
-            result.append
-
+    same = False
+    if secret_word == player_guess:
+        same = True
+        result = "🟩🟩🟩🟩🟩"
+    else:
+        for i in range(5):
+            if player_guess[i] != secret_word[i] and player_guess[i] in secret_word:
+                result.append("🟨")
+            elif player_guess[i] != secret_word[i]:
+                result.append("⬜")
+            elif player_guess[i] == secret_word[i]:
+                result.append("🟩")
+        result = "".join(result)
+    return result, same
 
 def display_guess(player_guess):
     print(" ".join(player_guess.uppper()))
 
-def has_won():
-
+def has_won(secret_word, player_guess):
+    win = False
+    if secret_word == player_guess:
+        win = True
+    return win
+        
