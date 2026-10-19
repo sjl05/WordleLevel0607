@@ -64,13 +64,15 @@ def end_game_or_not():
     """Returns False by default"""
     end_game = False
     while True:
-        play_again = input("Do you want to play again? ")
-        if play_again == "Yes" or play_again == "yes":
-            break
-        elif play_again == "No" or play_again == "no":
-            end_game = True
-            break
-        else:
-            print("Please type [yes] or [no]")
+        try:
+            play_again = input("Do you want to play again? ").strip().lower()
+            if play_again == "yes":
+                break
+            elif play_again == "no":
+                end_game = True
+                break
+            else:
+                print("Please type [yes] or [no]")
+        except:
+            print("Something went wrong, try again.")
     return end_game
-            
