@@ -1,18 +1,14 @@
-"""
-• choose_word() – Selects and returns a secret word.
-• get_guess() – Gets and validates the player’s guess.
-• evaluate_guess() – Compares the guess with the secret word and returns feedback.
-• display_guess() – Displays the guess and its feedback.
-• has_won() – Determines whether the player has guessed the word.
-"""
+#imports
 import random as rd
 
+#initializes lists to hold used and unused 5 letter words
 unused_words = ["apple", "beach", "chair", "dance", "earth", "flame", "grape", "house", "input", "jelly", "knife", "lemon", "magic", "night", "ocean", "piano", "queen", "river", "smile", "tiger", "uncle", "voice", "whale", "youth", "zebra", "bread", "cloud", "dream", "entry", "fresh", "ghost", "honey", "ivory", "juice", "kayak", "laugh", "money", "novel", "olive", "peace", "quick", "radio", "sleep", "table", "unity", "vivid", "woman", "yeast", "charm", "stone"]
 used_words = []
 
 def choose_word(): #Selects and returns a secret word.
     global unused_words
     global used_words
+    #each word can only be used once before they all go back in the list together
     if len(unused_words) == 0:
         unused_words.extend(used_words)
         used_words.clear()
@@ -23,7 +19,7 @@ def choose_word(): #Selects and returns a secret word.
 
 def get_guess(previous_guesses): #Gets and validates the player’s guess.
     while True:
-        guess = input("Enter a guess: ").strip().lower()
+        guess = input("Enter a guess: ").strip().lower() #take out whitespace and make it lowercase
         if len(guess) != 5:
             print("Please guess a 5 letter word. ")
             continue
@@ -39,14 +35,14 @@ def evaluate_guess(secret_word, player_guess): #Compares the guess with the secr
     if secret_word == player_guess:
         result = "🟩🟩🟩🟩🟩"
     else:
-        for i in range(5):
+        for i in range(5): 
             if player_guess[i] != secret_word[i] and player_guess[i] in secret_word:
                 result.append("🟨")
             elif player_guess[i] != secret_word[i]:
                 result.append("⬜")
             elif player_guess[i] == secret_word[i]:
                 result.append("🟩")
-        result = "".join(result)
+        result = "".join(result) #put the squares on one line
     return result
 
 def display_guess(player_guess, feedback): #Displays the guess and its feedback.
@@ -60,7 +56,7 @@ def has_won(secret_word, player_guess): #Determines whether the player has guess
         win = True
     return win
 
-def end_game_or_not():
+def end_game_or_not(): #asks the user if they want to play again or not, validates and error catching
     """Returns False by default"""
     end_game = False
     while True:
